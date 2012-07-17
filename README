@@ -1,0 +1,22 @@
+This is a collection of charge transport tutorials using the 
+VOTCA-CTP package, http://www.votca.org
+
+The development of VOTCA is mainly funded by academic research grants.
+If you use this package, please cite the following paper:
+
+Microscopic simulations of charge transport in disordered organic semiconductors, 
+V. Ruehle, A. Lukyanov, F. May, M. Schrader, T. Vehoff, J. Kirkpatrick, B. Baumeier, D. Andrienko, 
+J. Chem. Theory Comput., 2011, 7 (10), pp. 3335–3345
+
+Please post questions in the google discussion group at
+http://groups.google.com/group/votca-ctp
+
+All tutorials contain a run.sh with a simple workflow example.
+
+Carge transport in Alq3 (based on the above mentioned paper) 
+   alq3/MD_FILES              gromacs configuration and topology of 512 molecules
+   alq3/QC_FILES              gaussian ZINDO orbitals and optimized molecules
+   alq3/MP_FILES              gdma output - partial charges and polarizabilities for a neutral molecule and cation
+
+
+

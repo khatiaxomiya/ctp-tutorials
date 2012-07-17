@@ -1,0 +1,68 @@
+<topology>
+    <molecules>
+	<molecule>
+	    <name>Alq3</name>
+	    <mdname>Protein</mdname>
+	    <segments>	      
+		<segment>
+		    <name>Alq3</name>
+		    <qmcoords>QC_FILES/alq3.xyz</qmcoords>
+		    
+		    
+		    <!-- IZINDO INPUT -->		    
+		    <orbitals>QC_FILES/alq3.orb</orbitals>
+		    <basisset>INDO</basisset>		    
+		    <torbital_h>80</torbital_h>
+		    
+		    
+		    <!-- EINTERNAL INPUT -->
+		    <U_cC_nN_h>0.0</U_cC_nN_h>  <!-- Site energy      -->
+		    <U_nC_nN_h>0.13</U_nC_nN_h> <!-- Reorg. discharge -->
+		    <U_cN_cC_h>0.10</U_cN_cC_h> <!-- Reorg. charge    -->
+
+
+		    <!-- EMULTIPOLE INPUT -->		           
+		    <multipoles_n>MP_FILES/alq3_n.mps</multipoles_n>
+		    <multipoles_h>MP_FILES/alq3_h.mps</multipoles_h>	           	    
+		    <map2md>1</map2md>
+		    
+		    
+		    <fragments>
+			<fragment>
+			    <name>E1</name>			    
+			    <mdatoms>1:Alq:Na 1:Alq:Ca1 1:Alq:Ca9 1:Alq:Oa 1:Alq:Ca2 1:Alq:Ca3 1:Alq:Ca4 1:Alq:Ca5 1:Alq:Ca6 1:Alq:Ca7 1:Alq:Ca8 1:Alq:Ha2 1:Alq:Ha3 1:Alq:Ha4 1:Alq:Ha6 1:Alq:Ha7 1:Alq:Ha8</mdatoms>
+			    <qmatoms>   46:N      5:C       4:C      49:O      6:C       1:C       2:C       3:C       7:C       8:C       9:C      30:H      28:H      29:H      31:H      32:H      33:H  </qmatoms>
+			    <mpoles>    46:N      5:C       4:C      49:O      6:C       1:C       2:C       3:C       7:C       8:C       9:C      30:H      28:H      29:H      31:H      32:H      33:H  </mpoles>
+			    <weights>   14        12        12       16        12        12        12        12        12        12        12        0         0         0         0         0         0    </weights>	
+			    <localframe> 49 1 8 </localframe>    
+			</fragment>
+			<fragment>				
+			    <name>E2</name>			    
+			    <mdatoms>1:Alq:Nb 1:Alq:Cb1 1:Alq:Cb9 1:Alq:Ob 1:Alq:Cb2 1:Alq:Cb3 1:Alq:Cb4 1:Alq:Cb5 1:Alq:Cb6 1:Alq:Cb7 1:Alq:Cb8 1:Alq:Hb2 1:Alq:Hb3 1:Alq:Hb4 1:Alq:Hb6 1:Alq:Hb7 1:Alq:Hb8</mdatoms>
+			    <qmatoms>   48:N     15:C      12:C      50:O     26:C      27:C      10:C      11:C      13:C      14:C      25:C      40:H      41:H      42:H      43:H      44:H      45:H  </qmatoms>
+			    <mpoles>    48:N     15:C      12:C      50:O     26:C      27:C      10:C      11:C      13:C      14:C      25:C      40:H      41:H      42:H      43:H      44:H      45:H  </mpoles>
+			    <weights>   14       12        12        16       12        12        12        12        12        12        12        0         0         0         0         0         0     </weights>		
+			    <localframe> 50 27 14 </localframe>	    
+			</fragment>
+			<fragment>
+			    <name>E3</name>
+			    <mdatoms>1:Alq:Nc 1:Alq:Cc1 1:Alq:Cc9 1:Alq:Oc 1:Alq:Cc2 1:Alq:Cc3 1:Alq:Cc4 1:Alq:Cc5 1:Alq:Cc6 1:Alq:Cc7 1:Alq:Cc8 1:Alq:Hc2 1:Alq:Hc3 1:Alq:Hc4 1:Alq:Hc6 1:Alq:Hc7 1:Alq:Hc8</mdatoms>
+			    <qmatoms>   47:N     16:C      21:C      51:O     17:C      18:C      19:C      20:C      22:C      23:C      24:C      34:H      35:H      36:H      37:H      38:H      39:H  </qmatoms>
+			    <mpoles>    47:N     16:C      21:C      51:O     17:C      18:C      19:C      20:C      22:C      23:C      24:C      34:H      35:H      36:H      37:H      38:H      39:H  </mpoles>
+			    <weights>   14       12        12        16       12        12        12        12        12        12        12        0         0         0         0         0         0   </weights>	
+			    <localframe> 51 18 23 </localframe>
+			</fragment>
+			<fragment>
+			    <name>Alu</name>
+			    <mdatoms> 1:Alq:Al </mdatoms>
+			    <qmatoms>   52:Al  </qmatoms>
+			    <mpoles>    52:Al  </mpoles>
+			    <weights>   27     </weights>
+			    <localframe> 52 </localframe>	 
+			</fragment>
+		    </fragments>
+		</segment>		
+	    </segments>
+	</molecule>
+    </molecules>
+</topology>
