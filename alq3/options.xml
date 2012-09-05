@@ -186,4 +186,14 @@
 	</kmcparallel>
 
 
+        <kmcsingle>
+                <runtime>1e-5</runtime>                         <!-- Total runtime for each injection -->
+                <outputtime>1e-7</outputtime>                         <!-- Prints current node ID and position -->
+                <seed>102938475</seed>                  <!-- Seeds C++ RNG seeds Marsaglia RNG -->
+                <injection>*</injection>                <!-- Injection-site name pattern (uses wildcard-comparison) -->
+                <channel>hole</channel>                         <!-- 'electron' or 'hole' -->
+                <output>velocities.dat</output>     <!-- File that displays avg velocity for each injection and avg velocity avg over injection -->
+        </kmcsingle>
+
+
 </options>
