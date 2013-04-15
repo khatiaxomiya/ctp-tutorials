@@ -18,7 +18,7 @@
 	
 	<stateserver>
 		<out>stateserver.out</out>     		<!-- Calculator to retrieve info from database with formatted output -->
-		<keys>emp xmp elist ilist</keys>    <!-- Keys: emp xmp elist ilist pairs sites topology -->
+		<keys>emp xmp elist ilist ulm</keys>    <!-- Keys: emp xmp elist ilist pairs sites topology -->
 	</stateserver>	
 	
 	<tdump>
@@ -77,8 +77,8 @@
 			<check>mp_check.pdb</check> 		<!-- Check mapping of polar sites to fragments -->
 		</control>
 		<tholeparam>
-			<cutoff>3.0</cutoff>          		<!-- Cut-off for e-statics + polarization sphere e.g. 3.0 -->
-			<cutoff2>3.0</cutoff2>        		<!-- Cut-off for e-statics sphere e.g. 6.0 -->
+			<cutoff>2.5</cutoff>          		<!-- Cut-off for e-statics + polarization sphere e.g. 3.0 -->
+			<cutoff2>2.5</cutoff2>        		<!-- Cut-off for e-statics sphere e.g. 6.0 -->
 			<expdamp>0.39</expdamp>           	<!-- Damping factor for attenuated interactions --> 
 			<scaling>0.25 0.50 0.75</scaling> 	<!-- Bond scaling, currently not used -->
 		</tholeparam>
@@ -185,15 +185,10 @@
 		<output>velocities.dat</output>     <!-- File that displays avg velocity for each injection and avg velocity avg over injection -->
 	</kmcparallel>
 
-
-        <kmcsingle>
-                <runtime>1e-5</runtime>                         <!-- Total runtime for each injection -->
-                <outputtime>1e-7</outputtime>                         <!-- Prints current node ID and position -->
-                <seed>102938475</seed>                  <!-- Seeds C++ RNG seeds Marsaglia RNG -->
-                <injection>*</injection>                <!-- Injection-site name pattern (uses wildcard-comparison) -->
-                <channel>hole</channel>                         <!-- 'electron' or 'hole' -->
-                <output>velocities.dat</output>     <!-- File that displays avg velocity for each injection and avg velocity avg over injection -->
-        </kmcsingle>
-
-
+	<kmcsingle>
+		<runtime>1e-6</runtime>
+		<outputtime>1e-7</outputtime>
+		<seed>123</seed>
+		<injection>*</injection>
+	</kmcsingle>
 </options>

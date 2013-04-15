@@ -11,7 +11,7 @@ J. Chem. Theory Comput., 2011, 7 (10), pp. 3335–3345
 Please post questions in the google discussion group at
 http://groups.google.com/group/votca-ctp
 
-All tutorials contain a run.sh with a simple workflow example.
+All tutorials contain a run.sh and run.py with a simple workflow example.
 
 Carge transport in Alq3 (based on the above mentioned paper) 
    alq3/MD_FILES              gromacs configuration and topology of 512 molecules
