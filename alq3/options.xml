@@ -1,5 +1,12 @@
 <options>
 
+
+       <!-- AUTOMATED MAPPING GENERATION ++++++++++++++++++++++++++++++++++++++ -->
+       <pdb2map>
+          <file>Alq3.pdb</file>
+          <outfile>system.xml</outfile>
+       </pdb2map>
+
 	
 	<!-- IMPORT DATA ++++++++++++++++++++++++++++++++++++++ -->
 	
@@ -18,7 +25,7 @@
 	
 	<stateserver>
 		<out>stateserver.out</out>     		<!-- Calculator to retrieve info from database with formatted output -->
-		<keys>emp xmp elist ilist ulm</keys>    <!-- Keys: emp xmp elist ilist pairs sites topology -->
+		<keys>emp xmp elist ilist</keys>    <!-- Keys: emp xmp elist ilist pairs sites topology -->
 	</stateserver>	
 	
 	<tdump>
@@ -77,8 +84,8 @@
 			<check>mp_check.pdb</check> 		<!-- Check mapping of polar sites to fragments -->
 		</control>
 		<tholeparam>
-			<cutoff>2.5</cutoff>          		<!-- Cut-off for e-statics + polarization sphere e.g. 3.0 -->
-			<cutoff2>2.5</cutoff2>        		<!-- Cut-off for e-statics sphere e.g. 6.0 -->
+			<cutoff>3.0</cutoff>          		<!-- Cut-off for e-statics + polarization sphere e.g. 3.0 -->
+			<cutoff2>3.0</cutoff2>        		<!-- Cut-off for e-statics sphere e.g. 6.0 -->
 			<expdamp>0.39</expdamp>           	<!-- Damping factor for attenuated interactions --> 
 			<scaling>0.25 0.50 0.75</scaling> 	<!-- Bond scaling, currently not used -->
 		</tholeparam>
@@ -167,28 +174,29 @@
 
 	
 	
-	<!-- KMC CALCULATORS +++++++++++++++++++++++++++++++++++++ -->
 	
 	<rates>
 		<temperature>300</temperature> 			<!-- T [K] -->
-		<field> 1000000 0 0 </field>    		<!-- field x y z -->
+		<field>0 0 1000000</field>    		<!-- field x y z -->
 		<method>marcus</method>                 <!-- 'marcus' or 'jortner' -->
 	</rates>
+	<!-- KMC CALCULATORS +++++++++++++++++++++++++++++++++++++ -->
 	
-	<kmcparallel>
-		<runtime>1e-5</runtime>    			<!-- Total runtime for each injection -->
-		<outtime>1e-7</outtime>				<!-- Prints current node ID and position -->
-		<seed>102938475</seed>             	<!-- Seeds C++ RNG seeds Marsaglia RNG -->
-		<injection>*</injection>      		<!-- Injection-site name pattern (uses wildcard-comparison) -->
-		<channel>hole</channel>    			<!-- 'electron' or 'hole' -->
-		<runs>10</runs>            			<!-- Number of injections, distributed among threads -->
-		<output>velocities.dat</output>     <!-- File that displays avg velocity for each injection and avg velocity avg over injection -->
-	</kmcparallel>
+        <kmcmultiple>
+                <runtime>1E-5</runtime>
+                <outputtime>1E-7</outputtime>
+                <trajectoryfile>trajectory.csv</trajectoryfile>
+                <seed>123</seed>
+                <injection>*</injection>
+                <injectionmethod>random</injectionmethod>
+                <numberofcharges>4</numberofcharges>
+                <fieldX>0</fieldX>
+                <fieldY>0</fieldY>
+                <fieldZ>1000000</fieldZ>
+                <carriertype>hole</carriertype>
+                <temperature>300</temperature>
+                <explicitcoulomb>0</explicitcoulomb>
+                <rates>statefile</rates>
+        </kmcmultiple>
 
-	<kmcsingle>
-		<runtime>1e-6</runtime>
-		<outputtime>1e-7</outputtime>
-		<seed>123</seed>
-		<injection>*</injection>
-	</kmcsingle>
 </options>

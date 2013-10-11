@@ -1,0 +1,13 @@
+#!/bin/sh
+# Shell script to start the VOTCA tutor
+
+PY_VERSION=$(python -c 'import sys; print sys.version[:3]')
+
+CURR_DIR=$(dirname $0)
+
+if [ -e "${CURR_DIR}/../votca-ctp.ctp-tutorials/VOTCAtutor/ctp_tutor.py" ]; then
+  exec python "${CURR_DIR}/../votca-ctp.ctp-tutorials/VOTCAtutor/ctp_tutor.py"
+else
+  echo "ERROR: ctp_tutor.py not found!"
+  exit 1
+fi

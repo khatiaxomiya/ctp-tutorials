@@ -11,7 +11,11 @@ J. Chem. Theory Comput., 2011, 7 (10), pp. 3335–3345
 Please post questions in the google discussion group at
 http://groups.google.com/group/votca-ctp
 
-All tutorials contain a run.sh and run.py with a simple workflow example.
+For Alq3 there exists a tutor with a graphical user interface that can be started using the command
+./ctp_tutor
+in the respective folder. It requires Python with the wx package installed.
+
+All tutorials contain a run.sh with a simple workflow example.
 
 Carge transport in Alq3 (based on the above mentioned paper) 
    alq3/MD_FILES              gromacs configuration and topology of 512 molecules
@@ -20,3 +24,6 @@ Carge transport in Alq3 (based on the above mentioned paper)
 
 
 
+-------------------
+Note for developers: changes in the tutor should be done opening ctp_tutor.wxg in the wxGlade interface. Changes
+to the GUI directly in the python code will be overwritten.
