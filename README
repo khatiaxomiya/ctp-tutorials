@@ -1,24 +1,16 @@
 This is a collection of charge transport tutorials using the 
 VOTCA-CTP package, http://www.votca.org
 
+Python-based visual tutor can be run using tutorial.py
+It requires Python with the wx package installed.
+
+All tutorials contain a run.sh with a simple workflow example.
+
 Charge transport in Alq3 (alq3 folder)
  
 	alq3/MD_FILES	gromacs configuration and topology of 512 molecules
 	alq3/QC_FILES	gaussian ZINDO orbitals and optimized molecules
 	alq3/MP_FILES	gdma output - partial charges and polarizabilities for a neutral molecule and cation
-
-	A tutor with a graphical user interface ( 
-	./ctp_tutor
-. It requires Python with the wx package installed.
-
-All tutorials contain a run.sh with a simple workflow example.
->>>>>>> other
-
-<<<<<<< local
--------------------
-Note for developers: changes in the tutor should be done opening ctp_tutor.wxg in the wxGlade interface. Changes
-to the GUI directly in the python code will be overwritten.
->>>>>>> other
 
 --
 The development of VOTCA is mainly funded by academic research grants.
@@ -30,4 +22,7 @@ J. Chem. Theory Comput., 2011, 7 (10), pp. 3335–3345
 
 Please post questions in the google discussion group at
 http://groups.google.com/group/votca-ctp
+
+--
+Note for developers: changes in the tutorial.py will be overwritten by tutor.wxg in the wx folder. 
 

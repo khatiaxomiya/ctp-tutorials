@@ -17,7 +17,7 @@ import gettext
 import subprocess
 import os 
 import re
-workdir_ctp = "../alq3/"
+workdir_ctp = "./alq3/"
 # end own code
 
 class MyFrame2(wx.Frame):
@@ -25,7 +25,7 @@ class MyFrame2(wx.Frame):
         # begin wxGlade: MyFrame2.__init__
         kwds["style"] = wx.DEFAULT_FRAME_STYLE
         wx.Frame.__init__(self, *args, **kwds)
-        self.bitmap_1 = wx.StaticBitmap(self, wx.ID_ANY, wx.Bitmap("votca_logo_small.png", wx.BITMAP_TYPE_ANY))
+        self.bitmap_1 = wx.StaticBitmap(self, wx.ID_ANY, wx.Bitmap("wx/votca_logo_small.png", wx.BITMAP_TYPE_ANY))
         self.notebook_2 = wx.Notebook(self, wx.ID_ANY, style=0)
         self.notebook_2_pane_1 = wx.Panel(self.notebook_2, wx.ID_ANY, style=wx.DOUBLE_BORDER | wx.TAB_TRAVERSAL)
         self.label_1 = wx.StaticText(self.notebook_2_pane_1, wx.ID_ANY, _("Introduction to the VOTCA Tutor"), style=wx.ST_NO_AUTORESIZE)
@@ -48,7 +48,7 @@ class MyFrame2(wx.Frame):
         self.notebook_2_pane_3 = wx.Panel(self.notebook_2, wx.ID_ANY)
         self.label_3 = wx.StaticText(self.notebook_2_pane_3, wx.ID_ANY, _("Mapping Files and Mapping Calculator"), style=wx.ST_NO_AUTORESIZE)
         self.text_ctrl_2 = wx.TextCtrl(self.notebook_2_pane_3, wx.ID_ANY, _("The program ctp_map converts an atomistic trajectory to a course grained trajectory, i.e. one with conjugated segments and rigid fragments (see manual for details). It uses a file called system.xml in which each rigid fragment is defined by a list of atoms. Atom numbers, names and residue names should correspond to those used in the GROMACS topology.\n\nIn our example the file is already prepared. If you have to do it by hand, have a look at the example file in the manual. In case you have a .pdb file of a single molecule, the file can be generated automatically using the command\n\nctp_tools -e pdb2gmx -o options.xml\n\nThis command requires a file options.xml with the following content:\n\n<options>\n       <pdb2map>\n          <file>Alq3.pdb</file>\n          <outfile>system.xml</outfile>\n       </pdb2map>\n</options>\n\nOnce you have the mapping file system.xml, the mapping is generated using the command shown below. Please click the run button to see this in action."), style=wx.TE_MULTILINE | wx.TE_READONLY)
-        self.text_ctrl_3 = wx.TextCtrl(self.notebook_2_pane_3, wx.ID_ANY, _("ctp_map -t MD_FILES/system.tpr -c MD_FILES/system.gro -s system.xml -f state_alq3.sql"))
+        self.text_ctrl_3 = wx.TextCtrl(self.notebook_2_pane_3, wx.ID_ANY, _("ctp_map -t MD_FILES/system.tpr -c MD_FILES/system.gro -s system.xml -f state.sql"))
         self.button_run1 = wx.Button(self.notebook_2_pane_3, wx.ID_ANY, _("run"))
         self.button_next2 = wx.Button(self.notebook_2_pane_3, wx.ID_ANY, _("> next"))
         self.hyperlink_6 = wx.HyperlinkCtrl(self.notebook_2_pane_3, wx.ID_ANY, _("Manual Section 3.2 - Mapping file"), "")
@@ -57,7 +57,7 @@ class MyFrame2(wx.Frame):
         self.label_6 = wx.StaticText(self.notebook_2_pane_4, wx.ID_ANY, _("Neighbor List"), style=wx.ST_NO_AUTORESIZE)
         self.text_ctrl_4 = wx.TextCtrl(self.notebook_2_pane_4, wx.ID_ANY, _("To define a charge transport network neighboring molecules (segments) have to be identified. This is done by picking one molecule and then checking which other molecules lie within a sphere of a given cut-off. The value for that cut-off has to be specified in the respective section <neighborlist> of the options file. Open the options file and have a look at the section to see how it works.\n\nAfterwards calculate the neighbor list using the command below."), style=wx.TE_MULTILINE | wx.TE_READONLY)
         self.button_1 = wx.Button(self.notebook_2_pane_4, wx.ID_ANY, _("open options.xml"))
-        self.text_ctrl_5 = wx.TextCtrl(self.notebook_2_pane_4, wx.ID_ANY, _("ctp_evaluate -e neighborlist -o options.xml -f state_alq3.sql"))
+        self.text_ctrl_5 = wx.TextCtrl(self.notebook_2_pane_4, wx.ID_ANY, _("ctp_run -e neighborlist -o options.xml -f state.sql"))
         self.button_run2 = wx.Button(self.notebook_2_pane_4, wx.ID_ANY, _("run"))
         self.button_next3 = wx.Button(self.notebook_2_pane_4, wx.ID_ANY, _("> next"))
         self.hyperlink_7 = wx.HyperlinkCtrl(self.notebook_2_pane_4, wx.ID_ANY, _("Manual Section 2.4 - Neighbor list"), "")
@@ -66,7 +66,7 @@ class MyFrame2(wx.Frame):
         self.label_5a = wx.StaticText(self.notebook_2_pane_5, wx.ID_ANY, _("Site Energies"), style=wx.ST_NO_AUTORESIZE)
         self.text_ctrl_5a = wx.TextCtrl(self.notebook_2_pane_5, wx.ID_ANY, _("The driving force between charge transfer reaction is the difference in energy between neighboring molecules. The total difference is made up out of contributions of an (a) electrostatic interactions, (b) polarization effects and (c) internal energy differences. Furthermore there can be an externally applied electric field, which is taken into account when rates are calculated.\n\nIn this step point (a) and (b) are computed, using the calculator \"emultipole\" or \"xqmultipole\". Both of them are based on computing the interaction of partial charges of the molecule. Point (c) will be treated in the next step.\n\nAlternatively one can use full density functional calculations instead of partial charges, provided by the calculator \"edft\".\n\nYou can have a look at the emultipole section in the options.xml file and then run the calculator."), style=wx.TE_MULTILINE | wx.TE_READONLY)
         self.button_1_copy_1 = wx.Button(self.notebook_2_pane_5, wx.ID_ANY, _("open options.xml"))
-        self.text_ctrl_12 = wx.TextCtrl(self.notebook_2_pane_5, wx.ID_ANY, _("ctp_evaluate -e emultipole -o options.xml -f state_alq3.sql"))
+        self.text_ctrl_12 = wx.TextCtrl(self.notebook_2_pane_5, wx.ID_ANY, _("ctp_run -e emultipole -o options.xml -f state.sql"))
         self.button_run5 = wx.Button(self.notebook_2_pane_5, wx.ID_ANY, _("run"))
         self.button_next5 = wx.Button(self.notebook_2_pane_5, wx.ID_ANY, _("> next"))
         self.hyperlink_12_copy = wx.HyperlinkCtrl(self.notebook_2_pane_5, wx.ID_ANY, _("Manual Section 2.6 - Site energies"), "")
@@ -76,14 +76,14 @@ class MyFrame2(wx.Frame):
         self.notebook_2_pane_6 = wx.Panel(self.notebook_2, wx.ID_ANY)
         self.label_5 = wx.StaticText(self.notebook_2_pane_6, wx.ID_ANY, _("Neutral/Charged Molecule - Intramolecular Reorganization Energies"), style=wx.ST_NO_AUTORESIZE)
         self.text_ctrl_4_copy_copy = wx.TextCtrl(self.notebook_2_pane_6, wx.ID_ANY, _("The intramolecular reorganization energy is the energy difference of a pair of molecules before and after the charge has hopped. It is calculated from the energies of the single molecules in their different states, which have to be specified in the system.xml file:\n\n		    <!-- EINTERNAL INPUT -->\n		    <U_cC_nN_h>0.0</U_cC_nN_h><!-- Site energy      -->\n		    <U_nC_nN_h>0.13</U_nC_nN_h><!-- Reorg. discharge -->\n		    <U_cN_cC_h>0.10</U_cN_cC_h><!-- Reorg. charge    -->\n\nLet us explain the notation by taking the example U_nC_nN_h. We are looking here at the energy difference U of a single molecule, namely the difference of teh molecule being neutral in a charged environment (nC) and of the molecule being neutral in a neutral environment (nN). The intramolecular reorganization energy for hole transport is in this example given by 0.13 eV + 0.10 eV.\n\nYou can get these values from DFT calculations, e.g., using GAUSSIAN and afterwards enter them in the system.xml file. This procedure will not be treated in the tutorial, however it is a necessary step of your workflow.\n\nIn your options.xml file you have to specify the path to the system.xml file:\n	<einternal>\n		<energiesXML>system.xml</energiesXML>\n	</einternal>\n\nAfter that you can run the einternal calculator. All it does is read in the three values above and insert them into the state file (table segments, columns UnCnNe, UnCnNh....).\n\nIn case you used the edft calculator in the previous step, einternal is not needed beacause the edft calculator will calculate site specific energies."), style=wx.TE_MULTILINE | wx.TE_READONLY)
-        self.text_ctrl_9 = wx.TextCtrl(self.notebook_2_pane_6, wx.ID_ANY, _("ctp_evaluate -e einternal -o options.xml -f state_alq3.sql"))
+        self.text_ctrl_9 = wx.TextCtrl(self.notebook_2_pane_6, wx.ID_ANY, _("ctp_run -e einternal -o options.xml -f state.sql"))
         self.button_run6 = wx.Button(self.notebook_2_pane_6, wx.ID_ANY, _("run"))
         self.button_next6 = wx.Button(self.notebook_2_pane_6, wx.ID_ANY, _("> next"))
         self.hyperlink_7_copy_copy = wx.HyperlinkCtrl(self.notebook_2_pane_6, wx.ID_ANY, _("Manual Section 2.5.1 - Intramolecular Reoganization Energy"), "")
         self.notebook_2_pane_7 = wx.Panel(self.notebook_2, wx.ID_ANY)
         self.label_7 = wx.StaticText(self.notebook_2_pane_7, wx.ID_ANY, _("Outersphere Reorganization Energies"), style=wx.ST_NO_AUTORESIZE)
         self.text_ctrl_7 = wx.TextCtrl(self.notebook_2_pane_7, wx.ID_ANY, _("The outersphere reorganization energy is the contribution of surrounding molecules that are polarized durting the charge transfer and consequently show a change in their coordinates. This contribution is often small compared to the site energies, so that it can sometimes be neglected when Marcus rates are used. For Jortner rates outersphere reorganization energies are always needed.\n\nCalculate these energies by using the command below!"), style=wx.TE_MULTILINE | wx.TE_READONLY)
-        self.text_ctrl_8 = wx.TextCtrl(self.notebook_2_pane_7, wx.ID_ANY, _("ctp_evaluate -e eoutersphere -o options.xml -f state_alq3.sql"))
+        self.text_ctrl_8 = wx.TextCtrl(self.notebook_2_pane_7, wx.ID_ANY, _("ctp_run -e eoutersphere -o options.xml -f state.sql"))
         self.button_run8 = wx.Button(self.notebook_2_pane_7, wx.ID_ANY, _("run"))
         self.button_next7 = wx.Button(self.notebook_2_pane_7, wx.ID_ANY, _("> next"))
         self.hyperlink_7_copy_1 = wx.HyperlinkCtrl(self.notebook_2_pane_7, wx.ID_ANY, _("Manual Section 2.5.2 - Outersphere reorganization energy"), "")
@@ -92,7 +92,7 @@ class MyFrame2(wx.Frame):
         self.label_4 = wx.StaticText(self.notebook_2_pane_8, wx.ID_ANY, _("Molecular Orbitals"))
         self.text_ctrl_4a = wx.TextCtrl(self.notebook_2_pane_8, wx.ID_ANY, _("There are two different methods available in VOTCA for calculating electronic coupling elements (also known as transfer integrals). One is to use the full density functional calculation for each pair of neighboring molecules. This is a robust and accurate method, however, it requires a lot of computational time. The second method is the semiempirical ZINDO method (see reference to manual below).\n\nIn this tutorial we will use the ZINDO method, and in this case a file with molecular orbitals is needed. It can be generated using GAUSSIAN and is described in the manual in the reference given below. The procedure is not part of this tutorial but the output file is provided as QC_FILES/alq3.orb.\n\n"), style=wx.TE_MULTILINE | wx.TE_READONLY)
         self.label_4b = wx.StaticText(self.notebook_2_pane_8, wx.ID_ANY, _("Electronic Coupling"))
-        self.text_ctrl_4b = wx.TextCtrl(self.notebook_2_pane_8, wx.ID_ANY, _("Given that the file QC_FILES/alq3.orb is present, we can calculate electronic coupling elements using the semiempirical IZINDO method.\n\nIn order to run the method, for each segment the respective options have to be specified in the file system.xml. It looks like this:\n\n		    <!-- IZINDO INPUT -->		    \n		    <orbitals>QC_FILES/alq3.orb</orbitals>\n		    <basisset>INDO</basisset>		    \n		    <torbital_h>80</torbital_h>\n		    <torbital_e>79</torbital_h>\n\nYou can open the file clicking the button below to make yourself familiar with the structure of the file. The first line specifies to the path to the orbitals file that is described above. In the second line the basis set that was used in the molecular orbital calculations has to be given, usually \"INDO\". The last two lines specify the orbitals that participate in charge transport of holes and electrons, respectively. In this example orbital number 79 is the HOMO and orbital number 80 the LUMO orbital. You can include more orbitals by specifying not only a single number but a vector of orbital indices, where each entry is separated by a space.\n\nIn the file options.xml you have to specify the path to the file system.xml:\n\n<orbitals>QC_FILES/alq3.orb</orbitals>\n\nThe alternative method for calculating electronic coupling elements would be a full density functional calculation for each pair. In that case the alq3.orb file is not needed, however you need the edft calculations from the site energy section. The calculation is prepared and executed using the two commands\n\nctp_evaluate -e jobwriter -o options.xml -f state_alq3.sql\nctp_run -e idft -o options.xml -f state_alq3.sql \n\nYou would probably want to run the calculation on a cluster and not on a workstation. In that case the second command has to be submitted to your cluster.\n\nWe will here use only the semiempirical ZINDO method. Have a look at the file system.xml and then run the electronic coupling calculation!"), style=wx.TE_MULTILINE | wx.TE_READONLY)
+        self.text_ctrl_4b = wx.TextCtrl(self.notebook_2_pane_8, wx.ID_ANY, _("Given that the file QC_FILES/alq3.orb is present, we can calculate electronic coupling elements using the semiempirical IZINDO method.\n\nIn order to run the method, for each segment the respective options have to be specified in the file system.xml. It looks like this:\n\n		    <!-- IZINDO INPUT -->		    \n		    <orbitals>QC_FILES/alq3.orb</orbitals>\n		    <basisset>INDO</basisset>		    \n		    <torbital_h>80</torbital_h>\n		    <torbital_e>79</torbital_h>\n\nYou can open the file clicking the button below to make yourself familiar with the structure of the file. The first line specifies to the path to the orbitals file that is described above. In the second line the basis set that was used in the molecular orbital calculations has to be given, usually \"INDO\". The last two lines specify the orbitals that participate in charge transport of holes and electrons, respectively. In this example orbital number 79 is the HOMO and orbital number 80 the LUMO orbital. You can include more orbitals by specifying not only a single number but a vector of orbital indices, where each entry is separated by a space.\n\nIn the file options.xml you have to specify the path to the file system.xml:\n\n<orbitals>QC_FILES/alq3.orb</orbitals>\n\nThe alternative method for calculating electronic coupling elements would be a full density functional calculation for each pair. In that case the alq3.orb file is not needed, however you need the edft calculations from the site energy section. The calculation is prepared and executed using the two commands\n\nctp_run -e jobwriter -o options.xml -f state.sql\nctp_parallel -e idft -o options.xml -f state.sql \n\nYou would probably want to run the calculation on a cluster and not on a workstation. In that case the second command has to be submitted to your cluster.\n\nWe will here use only the semiempirical ZINDO method. Have a look at the file system.xml and then run the electronic coupling calculation!"), style=wx.TE_MULTILINE | wx.TE_READONLY)
         self.button_OpenSystem = wx.Button(self.notebook_2_pane_8, wx.ID_ANY, _("open system.xml"))
         self.text_ctrl_5_copy = wx.TextCtrl(self.notebook_2_pane_8, wx.ID_ANY, _("ctp_evaluate -e izindo -o options.xml -f state_alq3.sql"))
         self.button_run7 = wx.Button(self.notebook_2_pane_8, wx.ID_ANY, _("run"))
@@ -102,7 +102,7 @@ class MyFrame2(wx.Frame):
         self.notebook_2_pane_9 = wx.Panel(self.notebook_2, wx.ID_ANY)
         self.label_9 = wx.StaticText(self.notebook_2_pane_9, wx.ID_ANY, _("Rates"), style=wx.ST_NO_AUTORESIZE)
         self.text_ctrl_10 = wx.TextCtrl(self.notebook_2_pane_9, wx.ID_ANY, _("In the high temperature limit charge transfer rates can be described by Marcus theory. In order to use this theory, the value \"marcus\" has to be provided as the method in the options.xml file. It is also possible to calculate rates as proposed by Jortner and Bixon.\n\nFor Marcus rates the section in the options.xml file looks like this:\n\n	<rates>\n		<temperature>300</temperature> \n		<field> 0 0 1000000 </field>\n		<method>marcus</method>\n	</rates>\n\nThe first value is the temperature in Kelvin, the second the electric field (x,y,z) in V/m and the third the method.\n\nYou can run the rates calculation using the command below."), style=wx.TE_MULTILINE | wx.TE_READONLY)
-        self.text_ctrl_8_copy = wx.TextCtrl(self.notebook_2_pane_9, wx.ID_ANY, _("ctp_evaluate -e rates -o options.xml -f state_alq3.sql"))
+        self.text_ctrl_8_copy = wx.TextCtrl(self.notebook_2_pane_9, wx.ID_ANY, _("ctp_run -e rates -o options.xml -f state.sql"))
         self.button_run9 = wx.Button(self.notebook_2_pane_9, wx.ID_ANY, _("run"))
         self.button_next9 = wx.Button(self.notebook_2_pane_9, wx.ID_ANY, _("> next"))
         self.hyperlink_12 = wx.HyperlinkCtrl(self.notebook_2_pane_9, wx.ID_ANY, _("Manual Section 2.8 - Charge transfer rate"), "")
@@ -110,7 +110,7 @@ class MyFrame2(wx.Frame):
         self.notebook_2_pane_10 = wx.Panel(self.notebook_2, wx.ID_ANY)
         self.label_10 = wx.StaticText(self.notebook_2_pane_10, wx.ID_ANY, _("Transport Calculations with Kinetic Monte Carlo"), style=wx.ST_NO_AUTORESIZE)
         self.text_ctrl_11 = wx.TextCtrl(self.notebook_2_pane_10, wx.ID_ANY, _("The mobility of electrons or holes is the solution of the corresponding master equation. We now have the necessary ingredients at hand: sites with positions and rates for transfer between those sites.\n\nTo solve the Master equation we use here a Kinetic Monte Carlo method for multiple carriers: different charges are injected randomly and move throgh the sample with periodic boundary conditions. Two charges can not occupy the same site, which allows to observe density dependent effects.\n\nA typical input in the options file would be:\n\n    <kmcmultiple>\n            <runtime>1E-4</runtime>\n            <outputtime>1E-6</outputtime>\n            <trajectoryfile>trajectory.csv</trajectoryfile>\n            <seed>123</seed>\n            <injection>*</injection>\n            <injectionmethod>random</injectionmethod>\n            <numberofcharges>4</numberofcharges>\n            <fieldX>0</fieldX>\n            <fieldY>0</fieldY>\n            <fieldZ>1000000</fieldZ>\n            <carriertype>hole</carriertype>\n            <temperature>300</temperature>\n            <explicitcoulomb>0</explicitcoulomb>\n            <rates>statefile</rates>\n    </kmcmultiple>\n\nThat means: we are simulating a time of 1/10000 seconds, every 100 steps the position is written to the file trajectory.csv. The random number generagor is initialised with the number 123 (any integer) and all the sites can be used for injection. We have 4 holes moving in the sample, a field of 1000000 V/m in z direction and a temperature of 300 K. Make sure that the field and the temperature agree with what you spefied in the previous step  for the rates  calculation. \n\nThe last option <rates>statefile</rates> means that the rates from the statefile will be used. You can also set it to \"calculate\". In that case the field and temperature of the file will not be used but the options given for KMC.\n\nIf you want to run calculations for a single charge it is still recomendable to use the kmcmultiple calculator, because it has more output options. Just set \"numberofcharges\" to 1.\n\nThe result of the calculation is the average velocity of each carrier and the resulting mobility (velocity in field direction divided by the absolute value of the field). In order to get meaningful results you should average over different trajectories (i.e. different seeds) and choose a runtime sufficient for convergence."), style=wx.TE_MULTILINE | wx.TE_READONLY)
-        self.text_ctrl_8_copy_copy = wx.TextCtrl(self.notebook_2_pane_10, wx.ID_ANY, _("kmc_run -e kmcmultiple -o options.xml -f state_alq3.sql"))
+        self.text_ctrl_8_copy_copy = wx.TextCtrl(self.notebook_2_pane_10, wx.ID_ANY, _("kmc_run -e kmcmultiple -o options.xml -f state.sql"))
         self.button_run10 = wx.Button(self.notebook_2_pane_10, wx.ID_ANY, _("run"))
         self.hyperlink_16 = wx.HyperlinkCtrl(self.notebook_2_pane_10, wx.ID_ANY, _("Manual Section 2.9 - Master equation"), "")
         self.hyperlink_13_copy_1 = wx.HyperlinkCtrl(self.notebook_2_pane_10, wx.ID_ANY, _("Manual Section 4.2.22 - kmcmultiple calculator"), "")
@@ -351,13 +351,13 @@ class MyFrame2(wx.Frame):
         event.Skip()
 
     def onButtonRun1(self, event):  # wxGlade: MyFrame2.<event_handler>
-        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_map -t MD_FILES/system.tpr -c MD_FILES/system.gro -s system.xml -f state_alq3.sql",shell=True).pid
+        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_map -t MD_FILES/system.tpr -c MD_FILES/system.gro -s system.xml -f state.sql",shell=True).pid
         event.Skip()
     def OnButton2(self, event):  # wxGlade: MyFrame2.<event_handler>
         self.notebook_2.SetSelection(3)
         event.Skip()
     def onButtonRun2(self, event):  # wxGlade: MyFrame2.<event_handler>
-        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_evaluate -e neighborlist -o options.xml -f state_alq3.sql",shell=True).pid
+        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_run -e neighborlist -o options.xml -f state.sql",shell=True).pid
         event.Skip()
     def OnButton3(self, event):  # wxGlade: MyFrame2.<event_handler>
         self.notebook_2.SetSelection(4)
@@ -393,7 +393,7 @@ class MyFrame2(wx.Frame):
             pid = subprocess.Popen("xdg-open 'https://code.google.com/p/votca-ctp/wiki/Installation'",shell=True).pid
         event.Skip()
     def onButtonRunHelp(self, event):  # wxGlade: MyFrame2.<event_handler>
-        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_evaluate -d neighborlist",shell=True).pid
+        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_run -d neighborlist",shell=True).pid
         event.Skip()
     def OnButtonNext1(self, event):  # wxGlade: MyFrame2.<event_handler>
         self.notebook_2.SetSelection(1)
@@ -417,31 +417,31 @@ class MyFrame2(wx.Frame):
         pid = subprocess.Popen("xdg-open "+workdir_ctp+"system.xml",shell=True).pid
         event.Skip()
     def onButtonRun8(self, event):  # wxGlade: MyFrame2.<event_handler>
-        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_evaluate -e eoutersphere -o options.xml -f state_alq3.sql",shell=True).pid
+        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_run -e eoutersphere -o options.xml -f state.sql",shell=True).pid
         event.Skip()
     def OnButtonNext7(self, event):  # wxGlade: MyFrame2.<event_handler>
         self.notebook_2.SetSelection(7)
         event.Skip()
     def onButtonRun6(self, event):  # wxGlade: MyFrame2.<event_handler>
-        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_evaluate -e einternal -o options.xml -f state_alq3.sql",shell=True).pid
+        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_run -e einternal -o options.xml -f state.sql",shell=True).pid
         event.Skip()
     def OnButtonNext8(self, event):  # wxGlade: MyFrame2.<event_handler>
         self.notebook_2.SetSelection(8)
         event.Skip()
     def onButtonRun9(self, event):  # wxGlade: MyFrame2.<event_handler>
-        pid = subprocess.Popen("konsole --noclose --workdir"+workdir_ctp+" -e ctp_evaluate -e rates -o options.xml -f state_alq3.sql",shell=True).pid
+        pid = subprocess.Popen("konsole --noclose --workdir"+workdir_ctp+" -e ctp_run -e rates -o options.xml -f state.sql",shell=True).pid
         event.Skip()
     def OnButtonNext9(self, event):  # wxGlade: MyFrame2.<event_handler>
         self.notebook_2.SetSelection(9)
         event.Skip()
     def onButtonRun5(self, event):  # wxGlade: MyFrame2.<event_handler>
-        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_evaluate -e emultipole -o options.xml -f state_alq3.sql",shell=True).pid
+        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_run -e emultipole -o options.xml -f state.sql",shell=True).pid
         event.Skip()
     def onButtonRun10(self, event):  # wxGlade: MyFrame2.<event_handler>
-        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e kmc_run -e kmcmultiple -o options.xml -f state_alq3.sql",shell=True).pid
+        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e kmc_run -e kmcmultiple -o options.xml -f state.sql",shell=True).pid
         event.Skip()
     def onButtonRun7(self, event):  # wxGlade: MyFrame2.<event_handler>
-        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_evaluate -e izindo -o options.xml -f state_alq3.sql",shell=True).pid
+        pid = subprocess.Popen("konsole --noclose --workdir "+workdir_ctp+" -e ctp_run -e izindo -o options.xml -f state.sql",shell=True).pid
         event.Skip()
 # end of class MyFrame2
 if __name__ == "__main__":
