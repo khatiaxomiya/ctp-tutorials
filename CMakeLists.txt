@@ -8,7 +8,7 @@ set(PROJECT_VERSION "1.3-dev")
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules)
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ DESTINATION share/votca/ctp-tutorials
-	PATTERN ".hg*" EXCLUDE PATTERN "CMake*" EXCLUDE PATTERN "cmake_install.cmake" EXCLUDE
+	PATTERN ".git*" EXCLUDE PATTERN "CMake*" EXCLUDE PATTERN "cmake_install.cmake" EXCLUDE
 	PATTERN "install_manifest.txt" EXCLUDE PATTERN "*~" EXCLUDE)
 
 configure_file(${CMAKE_MODULE_PATH}/cmake_uninstall.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake IMMEDIATE @ONLY)
